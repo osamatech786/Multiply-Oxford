@@ -877,12 +877,23 @@ elif st.session_state.step == 8:
         "97 - Other qualification, level not known"
     ]
 
-    # Qualification selectbox
+    # Initialize qualification if not set
+    if 'qualification' not in st.session_state:
+        st.session_state.qualification = "99 No qualifications"  # Default value
+
+    # Safely handle the index to avoid ValueError
+    if st.session_state.qualification in qualifications:
+        selected_index = qualifications.index(st.session_state.qualification)
+    else:
+        selected_index = 0  # Default to the first option if qualification is missing
+
+    # Qualification selection using the index
     st.session_state.qualification = st.selectbox(
         "Please indicate the highest level of qualification you currently hold:",
         qualifications,
-        index=qualifications.index(st.session_state.get("qualification", "99 No qualifications"))
+        index=selected_index
     )
+
 
     # Navigation buttons
     next_clicked = st.button("Next")
