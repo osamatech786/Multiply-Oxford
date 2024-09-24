@@ -84,7 +84,7 @@ if 'step' not in st.session_state:
     if 'most_affecting' not in st.session_state: st.session_state.most_affecting = ""
 
     # Section 7: Highest Qualification
-    if 'qualification' not in st.session_state: st.session_state.qualification = "99 No qualifications"
+    if 'qualification' not in st.session_state: st.session_state.qualification = "No qualifications"
 
     # Section 8: Employment & Benefit
     if 'employment_status' not in st.session_state: st.session_state.employment_status = ""
@@ -863,37 +863,26 @@ elif st.session_state.step == 8:
 
     # List of qualification options
     qualifications = [
-        "99 - No qualifications",
-        "09 - Entry level / qualification below level 1",
-        "01 - Level 1",
-        "1A - Level 2",
-        "02 - Full level 2",
-        "2A - Level 3",
-        "03 - Full level 3",
-        "10 - Level 4",
-        "11 - Level 5",
-        "12 - Level 6",
-        "13 - Level 7 and above",
-        "97 - Other qualification, level not known"
+        "No qualifications",
+        "Entry level / qualification below level 1",
+        "Level 1",
+        "Level 2",
+        "Full level 2",
+        "Level 3",
+        "Full level 3",
+        "Level 4",
+        "Level 5",
+        "Level 6",
+        "Level 7 and above",
+        "Other qualification, level not known"
     ]
 
-    # Initialize qualification if not set
-    if 'qualification' not in st.session_state:
-        st.session_state.qualification = "99 No qualifications"  # Default value
-
-    # Safely handle the index to avoid ValueError
-    if st.session_state.qualification in qualifications:
-        selected_index = qualifications.index(st.session_state.qualification)
-    else:
-        selected_index = 0  # Default to the first option if qualification is missing
-
-    # Qualification selection using the index
+    # Qualification selectbox
     st.session_state.qualification = st.selectbox(
         "Please indicate the highest level of qualification you currently hold:",
         qualifications,
-        index=selected_index
+        index=qualifications.index(st.session_state.get("qualification", "No qualifications"))
     )
-
 
     # Navigation buttons
     next_clicked = st.button("Next")
@@ -1284,18 +1273,18 @@ elif st.session_state.step == 12:
 
 
                     # Section 7: Highest Level of Qualification
-                    'ph83': "X" if st.session_state.qualification == "99 No qualifications" else "",
-                    'ph84': "X" if st.session_state.qualification == "09 Entry level / qualification below level 1" else "",
-                    'ph85': "X" if st.session_state.qualification == "01 Level 1" else "",
-                    'ph86': "X" if st.session_state.qualification == "1A Level 2" else "",
-                    'ph87': "X" if st.session_state.qualification == "02 Full level 2" else "",
-                    'ph88': "X" if st.session_state.qualification == "2A Level 3" else "",
-                    'ph89': "X" if st.session_state.qualification == "03 Full level 3" else "",
-                    'ph90': "X" if st.session_state.qualification == "10 Level 4" else "",
-                    'ph91': "X" if st.session_state.qualification == "11 Level 5" else "",
-                    'ph92': "X" if st.session_state.qualification == "12 Level 6" else "",
-                    'ph93': "X" if st.session_state.qualification == "13 Level 7 and above" else "",
-                    'ph94': "X" if st.session_state.qualification == "97 Other qualification, level not known" else "",
+                    'ph83': "X" if st.session_state.qualification == "No qualifications" else "",
+                    'ph84': "X" if st.session_state.qualification == "Entry level / qualification below level 1" else "",
+                    'ph85': "X" if st.session_state.qualification == "Level 1" else "",
+                    'ph86': "X" if st.session_state.qualification == "Level 2" else "",
+                    'ph87': "X" if st.session_state.qualification == "Full level 2" else "",
+                    'ph88': "X" if st.session_state.qualification == "Level 3" else "",
+                    'ph89': "X" if st.session_state.qualification == "Full level 3" else "",
+                    'ph90': "X" if st.session_state.qualification == "Level 4" else "",
+                    'ph91': "X" if st.session_state.qualification == "Level 5" else "",
+                    'ph92': "X" if st.session_state.qualification == "Level 6" else "",
+                    'ph93': "X" if st.session_state.qualification == "Level 7 and above" else "",
+                    'ph94': "X" if st.session_state.qualification == "Other qualification, level not known" else "",
 
 
                     # Section 8: Employment & Benefit
